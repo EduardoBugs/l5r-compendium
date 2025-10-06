@@ -1,0 +1,20 @@
+# Ambientes virtuais
+.venv/
+venv/
+
+# Banco de dados local
+database/*.db
+
+# Arquivos temporários
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Configurações locais
+.env
+.idea/
+.vscode/
+
+# Output
+output/

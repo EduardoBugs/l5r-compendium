@@ -1,0 +1,14 @@
+# --- Core ---
+python-dotenv>=1.0.1
+sqlite-utils>=3.36.0
+pydantic>=2.8.2
+
+# --- Dev Tools ---
+black>=24.8.0
+isort>=5.13.2
+ruff>=0.6.5
+mypy>=1.11.1
+
+# --- Opcional (útil em scripts e parsing) ---
+pandas>=2.2.2
+openpyxl>=3.1.4
