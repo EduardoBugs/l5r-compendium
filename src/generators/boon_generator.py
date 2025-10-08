@@ -1,23 +1,23 @@
-from services.boon_service import get_boons
+from services.factory import ServiceFactory
 from utils import build_source_reference, write_json
 
 OUTPUT_FILENAME = "l5r5e.core-celestial-implement-boons.json"
 
 
 def generate_boons_json(output_dir: str | None = None) -> None:
-    """Generate JSON file for all Boons."""
-    boons = get_boons()
+    """Generate JSON file for all Celestial Implement Boons."""
+    service = ServiceFactory.get_service("boons")
+    boons = service.get_all()
 
-    entries = []
-    for boon in boons:
-        entries.append(
-            {
-                "id": f"{boon.name} [{boon.boon_type}]" if boon.boon_type else boon.name,
-                "name": f"{boon.name} [{boon.boon_type}]" if boon.boon_type else boon.name,
-                "description": boon.description or "",
-                "source_reference": build_source_reference(boon),
-            }
-        )
+    entries = [
+        {
+            "id": f"{boon.name} [{boon.boon_type}]" if boon.boon_type else boon.name,
+            "name": f"{boon.name} [{boon.boon_type}]" if boon.boon_type else boon.name,
+            "description": boon.description or "",
+            "source_reference": build_source_reference(boon),
+        }
+        for boon in boons
+    ]
 
     result = {
         "label": "Celestial Implement Boons",

@@ -1,16 +1,11 @@
-from services.bond_service import get_bonds
+from services.factory import ServiceFactory
 from utils import build_source_reference, write_json
 
 OUTPUT_FILENAME = "l5r5e.core-bonds.json"
 
 
 def _build_bond_description(bond) -> str:
-    """
-    Build the full HTML description for a bond entry.
-
-    The content includes the base description (inside <blockquote>),
-    followed by optional sections for Effects and Ability.
-    """
+    """Compose the HTML description of a Bond entry."""
     sections = []
     if bond.description:
         sections.append(f"<blockquote>{bond.description}</blockquote>")
@@ -22,25 +17,20 @@ def _build_bond_description(bond) -> str:
 
 
 def generate_bonds_json(output_dir: str | None = None) -> None:
-    """
-    Generate a JSON file for all bonds, formatted for FoundryVTT.
+    """Generate a JSON file for all bond entries using ORM service."""
+    service = ServiceFactory.get_service("bonds")
+    bonds = service.get_all()
 
-    Args:
-        output_dir (str): Directory to save the generated JSON file.
-    """
-    bonds = get_bonds()
-    entries = []
-
-    for bond in bonds:
-        entries.append(
-            {
-                "id": bond.id,
-                "name": bond.name,
-                "description": _build_bond_description(bond),
-                "source_reference": build_source_reference(bond),
-                "bond_type": bond.bond_type,
-            }
-        )
+    entries = [
+        {
+            "id": bond.foundry_id,
+            "name": bond.name,
+            "description": _build_bond_description(bond),
+            "bond_type": bond.bond_type or "",
+            "source_reference": build_source_reference(bond),
+        }
+        for bond in bonds
+    ]
 
     result = {
         "label": "Bonds",
