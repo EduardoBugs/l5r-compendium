@@ -1,5 +1,5 @@
-from services.base_service import BaseService
 from db.models.item_model import Item
+from services.base_service import BaseService
 
 
 class ItemService(BaseService[Item]):

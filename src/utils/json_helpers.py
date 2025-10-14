@@ -15,7 +15,7 @@ def build_source_reference(entity: Any) -> Dict[str, str | int]:
         dict: {"source": str, "page": int | str}
     """
     # Try to get reference from ORM relationship
-    if hasattr(entity, "book_ref") and getattr(entity, "book_ref") is not None:
+    if hasattr(entity, "book_ref") and entity.book_ref is not None:
         book_name = getattr(entity.book_ref, "babele_key", "")
         source = f"{book_name}".strip()
     # Fallback for Pydantic-style 'book_reference'

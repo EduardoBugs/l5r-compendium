@@ -1,5 +1,5 @@
-from services.base_service import BaseService
 from db.models.peculiarity_model import Peculiarity
+from services.base_service import BaseService
 
 
 class PeculiarityService(BaseService[Peculiarity]):

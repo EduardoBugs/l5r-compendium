@@ -15,7 +15,6 @@ from services.terrain_service import TerrainService
 from services.title_service import TitleService
 from services.weapon_service import WeaponService
 
-
 __all__ = [
     "BookService",
     "ArmorService",

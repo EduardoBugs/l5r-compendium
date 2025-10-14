@@ -1,6 +1,5 @@
 from services.school_cursus_service import SchoolCursusService
-from utils import write_json, build_html_table_from_text
-
+from utils import write_json
 
 OUTPUT_FILENAME = "l5r5e.core-journal-school-curriculum.json"
 
@@ -15,15 +14,13 @@ def _build_rank_table(rank_text: str | None, rank_number: int) -> str:
         if "|" in line:
             left, right = [part.strip() for part in line.split("|", 1)]
             rows += f"<tr><td>{left}</td><td>{right}</td></tr>"
-    return f"<tr><th colspan=\"2\"><h2>Rank {rank_number}</h2></th></tr>{rows}"
+    return f'<tr><th colspan="2"><h2>Rank {rank_number}</h2></th></tr>{rows}'
 
 
 def _build_cursus_html(cursus) -> str:
     """Build the HTML description for a single school cursus."""
     book_info = f"<blockquote>{cursus.book.title()} Rulebook p.{cursus.page}</blockquote>"
-    table_content = "".join(
-        _build_rank_table(getattr(cursus, f"rank_{i}"), i) for i in range(1, 6)
-    )
+    table_content = "".join(_build_rank_table(getattr(cursus, f"rank_{i}"), i) for i in range(1, 6))
     return f"{book_info}<table>{table_content}</table>"
 
 

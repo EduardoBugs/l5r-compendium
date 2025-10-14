@@ -3,6 +3,9 @@ python-dotenv>=1.0.1
 pydantic>=2.8.2
 SQLAlchemy>=2.0.36
 
+# --- Database drivers ---
+psycopg2-binary>=2.9.9
+
 # --- Database utils ---
 sqlite-utils>=3.36.0
 

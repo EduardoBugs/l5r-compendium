@@ -1,6 +1,14 @@
-from sqlalchemy import String, Integer, ForeignKey
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from db.base import Base
+
+if TYPE_CHECKING:
+    from db.models.book_model import Book
 
 
 class Technique(Base):

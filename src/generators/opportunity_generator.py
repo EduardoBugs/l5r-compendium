@@ -14,11 +14,7 @@ def generate_opportunities_json(output_dir: str | None = None) -> None:
 
     entries = {}
     for opp in opportunities:
-        book_reference = (
-            f"{opp.book} p.{opp.page}"
-            if opp.book and opp.page
-            else ""
-        )
+        book_reference = f"{opp.book} p.{opp.page}" if opp.book and opp.page else ""
 
         text_html = f"<blockquote>{book_reference}</blockquote><br>{opp.description or ''}"
 

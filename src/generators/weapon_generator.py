@@ -11,15 +11,17 @@ def generate_weapons_json(output_dir: str | None = None) -> None:
 
     entries = []
     for w in weapons:
-        entries.append({
-            "id": w.name,
-            "name": w.name,
-            "category": w.category or "",
-            "grip_1": w.grip_1 or "",
-            "grip_2": w.grip_2 or "",
-            "description": f"<blockquote>{w.description or ''}</blockquote>",
-            "source_reference": build_source_reference(w),
-        })
+        entries.append(
+            {
+                "id": w.name,
+                "name": w.name,
+                "category": w.category or "",
+                "grip_1": w.grip_1 or "",
+                "grip_2": w.grip_2 or "",
+                "description": f"<blockquote>{w.description or ''}</blockquote>",
+                "source_reference": build_source_reference(w),
+            }
+        )
 
     result = {
         "label": "Weapons",

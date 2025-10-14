@@ -1,7 +1,7 @@
-from services.title_service import TitleService
-from utils import build_source_reference, write_json
 import html
 
+from services.title_service import TitleService
+from utils import build_source_reference, write_json
 
 OUTPUT_FILENAME = "l5r5e.core-titles.json"
 
@@ -43,12 +43,14 @@ def generate_titles_json(output_dir: str | None = None) -> None:
 
     entries = []
     for t in titles:
-        entries.append({
-            "id": t.name,
-            "name": t.name,
-            "description": _build_description(t),
-            "source_reference": build_source_reference(t),
-        })
+        entries.append(
+            {
+                "id": t.name,
+                "name": t.name,
+                "description": _build_description(t),
+                "source_reference": build_source_reference(t),
+            }
+        )
 
     result = {
         "label": "Titles",

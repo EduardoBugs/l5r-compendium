@@ -2,50 +2,50 @@
 # L5R Compendium - Dev Makefile
 # ==============================
 
-# Diretórios ignorados por padrão
+# Default directories to ignore
 EXCLUDES := --exclude .venv --exclude venv --exclude build --exclude __pycache__
 
 # ==================================
-# 🔧 Comandos principais de formatação
+# 🔧 Main Formatting and Lint Commands
 # ==================================
 
-# 👉 Verifica formatação e tipos (sem alterar arquivos)
+# 👉 Check formatting and types (without modifying files)
 lint:
-	@echo "🔍 Verificando código com Black, isort, Ruff e Mypy..."
+	@echo "🔍 Checking code with Black, isort, Ruff, and Mypy..."
 	black --check .
 	isort --check-only .
 	ruff check .
 	mypy .
 
-# 👉 Corrige automaticamente estilo e lint
+# 👉 Automatically fix style and lint issues
 fix:
-	@echo "🧹 Formatando e corrigindo código..."
+	@echo "🧹 Formatting and fixing code..."
 	black .
 	isort .
 	ruff check --fix .
 
-# 👉 Limpa arquivos temporários e caches
+# 👉 Clean up temporary files and caches
 clean:
-	@echo "🗑️ Limpando caches e pastas temporárias..."
+	@echo "🗑️ Cleaning caches and temporary folders..."
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	rm -rf .mypy_cache .ruff_cache .pytest_cache
 
-# 👉 Roda tudo de uma vez (fixa e depois valida)
+# 👉 Run everything at once (fix, then validate)
 all: fix lint
 
 # ==================================
-# 🧪 Outras utilidades
+# 🧪 Additional Utilities
 # ==================================
 
-# 👉 Atualiza dependências
+# 👉 Update dependencies
 update:
-	@echo "📦 Atualizando dependências..."
+	@echo "📦 Updating dependencies..."
 	pip install -U pip
 	pip install -U -r requirements.txt
 
-# 👉 Mostra versão dos formatadores
+# 👉 Show versions of formatting tools
 versions:
-	@echo "🧰 Versões das ferramentas:"
+	@echo "🧰 Tool versions:"
 	@black --version
 	@isort --version
 	@ruff --version

@@ -6,10 +6,10 @@ from db.models import (
     Book,
     Boon,
     Condition,
-    ItemPattern,
     Item,
+    ItemPattern,
     Opportunity,
-    Peculiarity
+    Peculiarity,
 )
 from services import (
     ArmorService,
@@ -20,7 +20,7 @@ from services import (
     ItemPatternService,
     ItemService,
     OpportunityService,
-    PeculiarityService
+    PeculiarityService,
 )
 from services.base_service import BaseService
 

@@ -5,6 +5,8 @@ from typing import Any, Union
 
 from dotenv import load_dotenv
 
+from .log_helper import log
+
 # Load environment variables
 load_dotenv()
 
@@ -51,9 +53,9 @@ def write_json(data: Any, filename: str, output_dir: Union[str, Path, None] = No
         entry_count = len(entries) if isinstance(entries, (list, dict)) else 0
 
     if entry_count:
-        print(f"✅ JSON file generated: {filepath.resolve()} (with {entry_count} entries)")
+        log.success(f"📦 JSON file generated: {filepath.resolve()} (with {entry_count} entries)")
     else:
-        print(f"✅ JSON file generated: {filepath.resolve()}")
+        log.success(f"📦 JSON file generated: {filepath.resolve()}")
 
     return filepath.resolve()
 

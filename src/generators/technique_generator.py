@@ -1,7 +1,9 @@
-from services.technique_service import TechniqueService
-from utils import build_source_reference, write_json
 import os
 
+from services.technique_service import TechniqueService
+from utils import build_source_reference, write_json
+
+from utils import log
 
 def _build_description_html(t):
     html = t.description.strip() if t.description else ""
@@ -31,15 +33,19 @@ def generate_techniques_json(output_dir: str | None = None):
             continue
         grouped.setdefault(t.technique_type.lower(), []).append(t)
 
+    log.stage("Generating Techniques")
+
     for technique_type, items in grouped.items():
         entries = []
         for t in items:
-            entries.append({
-                "id": t.name,
-                "name": t.name,
-                "description": _build_description_html(t),
-                "source_reference": build_source_reference(t),
-            })
+            entries.append(
+                {
+                    "id": t.name,
+                    "name": t.name,
+                    "description": _build_description_html(t),
+                    "source_reference": build_source_reference(t),
+                }
+            )
 
         result = {
             "label": f"Techniques {technique_type.capitalize()}",
@@ -52,3 +58,5 @@ def generate_techniques_json(output_dir: str | None = None):
 
         filename = f"l5r5e.core-techniques-{technique_type}.json"
         write_json(result, filename, output_dir or os.path.join("output"))
+
+    log.stage_end()

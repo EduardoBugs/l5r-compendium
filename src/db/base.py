@@ -8,13 +8,20 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 load_dotenv(os.path.join(ROOT_DIR, ".env"))
 
-DB_PATH = os.getenv("DB_PATH")
-if not DB_PATH:
-    raise ValueError("❌ DB_PATH is not set in .env file")
+# --- Read environment variables ---
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+
+if not DB_NAME or not DB_USER:
+    raise ValueError("❌ Missing database credentials in .env file")
+
+# --- SQLAlchemy PostgreSQL URL ---
+DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # --- SQLAlchemy Engine configuration ---
-DATABASE_URL = f"sqlite:///{DB_PATH}"
-
 engine = create_engine(
     DATABASE_URL,
     echo=False,  # set to True for SQL debug logs
@@ -44,6 +51,5 @@ def get_session():
 
 def init_db():
     """Create all tables if they do not exist yet."""
-
     Base.metadata.create_all(bind=engine)
     print("✅ Database schema initialized successfully.")

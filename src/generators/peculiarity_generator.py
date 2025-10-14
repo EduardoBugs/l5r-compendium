@@ -1,7 +1,9 @@
-from services.peculiarity_service import PeculiarityService
-from utils import build_source_reference, write_json
 import os
 
+from services.peculiarity_service import PeculiarityService
+from utils import build_source_reference, write_json
+
+from utils import log
 
 # --- Nome dos arquivos por tipo ---
 PECULIARITY_FILE_MAP = {
@@ -36,6 +38,8 @@ def generate_peculiarities_json(output_dir: str | None = None) -> None:
         key = p.peculiarity_type.strip().lower()
         grouped.setdefault(key, []).append(p)
 
+    log.stage("Generating Peculiarities")
+
     for pec_type, items in grouped.items():
         filename = PECULIARITY_FILE_MAP.get(pec_type)
         if not filename:
@@ -44,13 +48,15 @@ def generate_peculiarities_json(output_dir: str | None = None) -> None:
 
         entries = []
         for p in items:
-            entries.append({
-                "id": p.name,
-                "name": p.name,
-                "types": p.types or "",
-                "description": _build_description(p),
-                "source_reference": build_source_reference(p),
-            })
+            entries.append(
+                {
+                    "id": p.name,
+                    "name": p.name,
+                    "types": p.types or "",
+                    "description": _build_description(p),
+                    "source_reference": build_source_reference(p),
+                }
+            )
 
         result = {
             "label": pec_type.capitalize(),
@@ -63,3 +69,5 @@ def generate_peculiarities_json(output_dir: str | None = None) -> None:
         }
 
         write_json(result, filename, output_dir or os.path.join("output"))
+
+    log.stage_end()

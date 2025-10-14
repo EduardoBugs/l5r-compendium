@@ -1,5 +1,5 @@
-from services.base_service import BaseService
 from db.models.opportunity_model import Opportunity
+from services.base_service import BaseService
 
 
 class OpportunityService(BaseService[Opportunity]):

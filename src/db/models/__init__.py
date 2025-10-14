@@ -15,7 +15,6 @@ from db.models.terrain_model import Terrain
 from db.models.title_model import Title
 from db.models.weapon_model import Weapon
 
-
 __all__ = [
     "Book",
     "Armor",
