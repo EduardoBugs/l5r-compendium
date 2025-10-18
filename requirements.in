@@ -1,0 +1,30 @@
+# ===========================
+# Core
+# ===========================
+python-dotenv
+pydantic
+SQLAlchemy
+
+# ===========================
+# Database drivers
+# ===========================
+psycopg2-binary
+
+# ===========================
+# Database utils
+# ===========================
+sqlite-utils
+
+# ===========================
+# Dev Tools
+# ===========================
+black
+isort
+ruff
+mypy
+
+# ===========================
+# Optional (data manipulation)
+# ===========================
+pandas
+openpyxl

@@ -11,8 +11,8 @@ def generate_boons_json(output_dir: str | None = None) -> None:
 
     entries = [
         {
-            "id": f"{boon.name} [{boon.boon_type}]" if boon.boon_type else boon.name,
-            "name": f"{boon.name} [{boon.boon_type}]" if boon.boon_type else boon.name,
+            "id": f"{boon.name}",
+            "name": f"{boon.name}",
             "description": boon.description or "",
             "source_reference": build_source_reference(boon),
         }

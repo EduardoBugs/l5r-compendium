@@ -14,7 +14,7 @@ def _build_rank_table(rank_text: str | None, rank_number: int) -> str:
         if "|" in line:
             left, right = [part.strip() for part in line.split("|", 1)]
             rows += f"<tr><td>{left}</td><td>{right}</td></tr>"
-    return f'<tr><th colspan="2"><h2>Rank {rank_number}</h2></th></tr>{rows}'
+    return f"<tr><th colspan='2'><h2>Rank {rank_number}</h2></th></tr>{rows}"
 
 
 def _build_cursus_html(cursus) -> str:
